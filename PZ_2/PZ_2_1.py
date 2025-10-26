@@ -14,3 +14,4 @@ while True:
             print("Число должно быть от 1 до 365")
     except ValueError:
         print("Ошибка! Введите целое число")
+        
