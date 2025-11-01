@@ -5,13 +5,13 @@
 
 while True:
     try:
-        K = int(input("Введите K (1-365): "))
+        K = int(input("Введите номер дня в году (1-365): "))
         if 1 <= K <= 365:
-            day_number = K % 7
-            print(f"Номер дня недели: {day_number}")
+            weekday = (K - 2) % 7
+            print(f"Номер дня недели для {K}-го дня: {weekday} ")
             break
         else:
-            print("Число должно быть от 1 до 365")
+            print("Некорректный номер дня. Он должен быть в диапазоне 1-365.")
     except ValueError:
-        print("Ошибка! Введите целое число")
+        print("Введите целое число!")
         
