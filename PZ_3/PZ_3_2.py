@@ -2,16 +2,19 @@
 #последних точек (B или C) расположена ближе к A, и вывести эту точку и ее
 #расстояние от точки A.
 
-A = float(input("A = "))
-B = float(input("B = "))
-C = float(input("C = "))
-
-d1 = abs(A - B)
-d2 = abs(A - C)
-
-if d1 < d2:
-    print(f"B {d1}")
-elif d2 < d1:
-    print(f"C {d2}")
-else:
-    print(f"Одинаково {d1}")
+while True:
+  try:
+      A = float(input("Введите первое (A) число: "))
+      B = float(input("Введите второе (B) число: "))
+      C = float(input("Введите третье (C) число: "))
+      x1 = abs(A - B)
+      x2 = abs(A - C)
+      if x1 < x2:
+        print(f"B находится на расстоянии {x1} от точки А")
+      elif x2 < x1:
+        print(f"C находится на расстоянии {x2} от точки А")
+      else:
+        print("Одинаково")
+  except ValueError:
+    print("Ошибка, попробуйте снова")
+  break
