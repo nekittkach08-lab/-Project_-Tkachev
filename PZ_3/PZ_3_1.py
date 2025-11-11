@@ -10,7 +10,7 @@ while True:
         x1, y1 = map(float, input("x1 y1: ").split())
         x2, y2 = map(float, input("x2 y2: ").split())
         break
-    except:
+    except ValueError:
         print("Ошибка, попробуйте ввести числа через пробел.")
 
 print("лежит" if x2 <= x <= x1 and y2 <= y <= y1 else "не лежит")
