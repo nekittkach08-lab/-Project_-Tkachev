@@ -7,22 +7,27 @@
 # в который поместить текст в стихотворной форме предварительно поставив
 # последнюю строку между второй и третьей.
 
-with open('text18-29.txt', 'r', encoding='utf-8') as f:
-    lines = f.readlines()
+# 1. Читаем всё из файла
+f = open('text18-29.txt', 'r', encoding='utf-8')
+lines = f.readlines()
+f.close()
 
-full_text = "".join(lines)
-print("Содержимое файла:")
-print(full_text)
-print(f"\nКоличество символов: {len(full_text)}")
+# 2. Выводим текст и считаем символы
+text = "".join(lines)
+print("Текст из файла:")
+print(text)
+print("Количество символов:", len(text))
 
-clean_lines = [line.strip() for line in lines if line.strip()]
+# 3. Переставляем строки (как просили в задаче)
+# Индекс 2 — это как раз между 2-й и 3-й строкой
+last_line = lines.pop() # Забираем последнюю
+lines.insert(2, last_line) # Ставим на третье место
 
-if len(clean_lines) >= 3:
-    last_line = clean_lines.pop()
-    clean_lines.insert(2, last_line)
+# 4. Сохраняем в новый файл
+f_new = open('new_text.txt', 'w', encoding='utf-8')
+for s in lines:
+    f_new.write(s)
+f_new.close()
 
-with open('new_text.txt', 'w', encoding='utf-8') as f:
-    for line in clean_lines:
-        f.write(line + '\n')
+print("\nФайл создан!")
 
-print("\nНовый файл 'new_text.txt' успешно создан.")
