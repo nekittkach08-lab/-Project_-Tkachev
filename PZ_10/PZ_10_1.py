@@ -81,7 +81,6 @@ for num in list2_nums:
     if num % 2 != 0:
         odd_count2 += 1
 
-# Дозаписываем результаты с UTF-8
 f_result = open('result.txt', 'a', encoding='utf-8')
 f_result.write('\n')
 f_result.write(f'Количество элементов первого и второго файлов: {count1} и {count2}\n')
