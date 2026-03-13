@@ -1,4 +1,4 @@
-# Задание 29. Средствами языка Python сформировать два текстовых файла (.txt),
+# Задание 1. Средствами языка Python сформировать два текстовых файла (.txt),
 # содержащих по одной последовательности из целых положительных и отрицательных чисел.
 # Сформировать новый текстовый файл (.txt) следующего вида, предварительно выполнив требуемую обработку элементов:
 #
@@ -8,71 +8,61 @@
 # Количество четных элементов первого файла:
 # Количество нечетных элементов второго файла:
 
+# 1. Списки чисел
 list1 = [15, -8, 23, -4, 37, 0, -12, 42, -5, 18]
 list2 = [-3, 16, -8, 25, 0, 11, -4, 30, -6, 19, 100]
 
-data_str1 = ' '.join(map(str, list1))
+# 2. Создаем первый файл
 f1 = open('file1.txt', 'w', encoding='utf-8')
-f1.write(data_str1)
+for num in list1:
+    f1.write(str(num) + ' ')
 f1.close()
 
-data_str2 = ' '.join(map(str, list2))
+# 3. Создаем второй файл
 f2 = open('file2.txt', 'w', encoding='utf-8')
-f2.write(data_str2)
+for num in list2:
+    f2.write(str(num) + ' ')
 f2.close()
 
-f_result = open('result.txt', 'w', encoding='utf-8')
-f_result.write('Элементы первого и второго файлов: ')
-f_result.write('\n')
+# --- ОБРАБОТКА ---
 
+# Читаем числа из файлов обратно в списки (чтобы всё было честно)
 f1 = open('file1.txt', 'r', encoding='utf-8')
-first_content = f1.read()
-f_result.write(first_content)
-f1.close()
-
-f_result.write(' : ')
-f2 = open('file2.txt', 'r', encoding='utf-8')
-second_content = f2.read()
-f_result.write(second_content)
-f2.close()
-f_result.write('\n')
-f_result.close()
-
-f1 = open('file1.txt', 'r', encoding='utf-8')
-line1 = f1.read()
-list1_nums = line1.split()
-for i in range(len(list1_nums)):
-    list1_nums[i] = int(list1_nums[i])
+nums1 = f1.read().split()
 f1.close()
 
 f2 = open('file2.txt', 'r', encoding='utf-8')
-line2 = f2.read()
-list2_nums = line2.split()
-for i in range(len(list2_nums)):
-    list2_nums[i] = int(list2_nums[i])
+nums2 = f2.read().split()
 f2.close()
 
-count1 = len(list1_nums)
-count2 = len(list2_nums)
+# Считаем общие элементы через цикл
+common_count = 0
+for x in nums1:
+    if x in nums2:
+        common_count += 1
 
-set1 = set(list1_nums)
-set2 = set(list2_nums)
-common_elements = set1.intersection(set2)
-common_count = len(common_elements)
+# Считаем четные в первом
+even1 = 0
+for x in nums1:
+    if int(x) % 2 == 0:
+        even1 += 1
 
-even_count1 = 0
-for num in list1_nums:
-    if num % 2 == 0:
-        even_count1 += 1
+# Считаем нечетные во втором
+odd2 = 0
+for x in nums2:
+    if int(x) % 2 != 0:
+        odd2 += 1
 
-odd_count2 = 0
-for num in list2_nums:
-    if num % 2 != 0:
-        odd_count2 += 1
+# --- ЗАПИСЬ РЕЗУЛЬТАТА ---
 
-f_result = open('result.txt', 'a', encoding='utf-8')
-f_result.write(f'Количество элементов первого и второго файлов: {count1} и {count2}\n')
-f_result.write(f'Количество элементов, общих для двух файлов: {common_count}\n')
-f_result.write(f'Количество четных элементов первого файла: {even_count1}\n')
-f_result.write(f'Количество нечетных элементов второго файла: {odd_count2}\n')
-f_result.close()
+res = open('result.txt', 'w', encoding='utf-8')
+
+res.write('Элементы первого и второго файлов: ' + ' '.join(nums1) + ' | ' + ' '.join(nums2) + '\n')
+res.write('Количество элементов первого и второго файлов: ' + str(len(nums1)) + ' и ' + str(len(nums2)) + '\n')
+res.write('Количество элементов, общих для двух файлов: ' + str(common_count) + '\n')
+res.write('Количество четных элементов первого файла: ' + str(even1) + '\n')
+res.write('Количество нечетных элементов второго файла: ' + str(odd2) + '\n')
+
+res.close()
+print("Готово! Проверь файл result.txt")
+
