@@ -2,42 +2,32 @@
 # его содержимое, количество символов в тексте. Сформировать новый файл,
 # в который поместить текст в стихотворной форме предварительно поставив
 # последнюю строку между второй и третьей.
+# Задача 2. Из предложенного текстового файла (text18-29.txt) вывести на экран
+# его содержимое, количество символов в тексте. Сформировать новый файл,
+# в который поместить текст в стихотворной форме предварительно поставив
+# последнюю строку между второй и третьей.
 
-file_name = 'text18-29.txt'
+# 1. Читаем всё из файла
+f = open('text18-29.txt', 'r', encoding='utf-8')
+lines = f.readlines()
+f.close()
 
-try:
-    with open(file_name, 'r', encoding='utf-8') as file:
-        lines = file.readlines()
-    full_text = ''.join(lines)
-    char_count = len(full_text)
+# 2. Выводим текст и считаем символы
+text = "".join(lines)
+print("Текст из файла:")
+print(text)
+print("Количество символов:", len(text))
 
-    print(f"Количество символов в тексте (включая пробелы и знаки препинания): {char_count}")
-    print()
+# 3. Переставляем строки (как просили в задаче)
+# Индекс 2 — это как раз между 2-й и 3-й строкой
+last_line = lines.pop() # Забираем последнюю
+lines.insert(2, last_line) # Ставим на третье место
 
-    if len(lines) >= 3:
-        last_line = lines[-1]
+# 4. Сохраняем в новый файл
+f_new = open('new_text.txt', 'w', encoding='utf-8')
+for s in lines:
+    f_new.write(s)
+f_new.close()
 
-        lines.pop()
+print("\nФайл создан!")
 
-        lines.insert(2, last_line)
-
-        print("Текст после перестановки последней строки между второй и третьей:")
-        print("-----------------------------------------------------------------")
-        for line in lines:
-            print(line, end='')
-        print("-----------------------------------------------------------------")
-
-        # 5. Записываем результат в новый файл
-        new_file_name = 'text18-29_modified.txt'
-        with open(new_file_name, 'w', encoding='utf-8') as new_file:
-            new_file.writelines(lines)
-
-        print(f"Результат сохранен в файл: {new_file_name}")
-
-    else:
-        print("В файле недостаточно строк для выполнения перестановки.")
-
-except FileNotFoundError:
-    print(f"Ошибка: Файл '{file_name}' не найден!")
-except Exception as e:
-    print(f"Произошла ошибка: {e}")
