@@ -5,10 +5,8 @@ import random
 rows = int(input("Введите количество строк: "))
 cols = int(input("Введите количество столбцов: "))
 
-matrix = []
-for i in range(rows):
-    row = [random.randint(1, 9) for _ in range(cols)]
-    matrix.append(row)
+# функциональное создание матрицы
+matrix = list(map(lambda _: [random.randint(1, 9) for _ in range(cols)], range(rows)))
 
 print("\nИзначальная матрица:")
 for row in matrix:

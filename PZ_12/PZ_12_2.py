@@ -6,16 +6,14 @@ import random
 rows = int(input("Введите количество строк: "))
 cols = int(input("Введите количество столбцов: "))
 
-matrix = []
-for i in range(rows):
-    row = [random.randint(1, 9) for _ in range(cols)]
-    matrix.append(row)
+# функциональное создание матрицы
+matrix = list(map(lambda _: [random.randint(1, 9) for _ in range(cols)], range(rows)))
 
 print("\nИзначальная матрица:")
 for row in matrix:
     print(row)
 
-massive = [random.randint(10, 99) for _ in range(cols)]
+massive = [random.randint(-5, 5) for _ in range(cols)]
 print("\nМассив для замены:", massive)
 
 matrix[2] = massive
